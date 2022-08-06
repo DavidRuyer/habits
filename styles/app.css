@@ -17,13 +17,12 @@ body {
 .gradient-light {
   background: linear-gradient(45deg, #5ee4bf 0%, #4ed1de 100%);
 }
-
 /* Circle */
 .circle-inner {
   stroke-dasharray: 283% 283%;
   stroke-dashoffset: 0%;
   stroke-width: 3;
-  stroke: rgba(255, 255, 255, 0.7);
+  stroke: rgba(255, 255, 255, 0.8);
   fill: transparent;
   transition: stroke-dashoffset 300ms;
   transform: rotate(-90deg) scaleY(-1);

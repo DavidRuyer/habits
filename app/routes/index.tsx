@@ -2,7 +2,7 @@ import type { Hit } from "@prisma/client";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, Link, useLoaderData } from "@remix-run/react";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import { useEffect, useState } from "react";
@@ -65,14 +65,12 @@ export default function Index() {
   const time = useTimer();
 
   return (
-    <div className="flex flex-col h-full ">
+    <div className="flex flex-col h-full mx-8">
       <div className="flex-grow"></div>
 
-      <div className="m-8">
-        <SafeProgress lastHit={data.lastHit?.createdAt} now={time} />
-      </div>
+      <SafeProgress lastHit={data.lastHit?.createdAt} now={time} />
 
-      <div className="mt-12 mx-8">
+      <div className="mt-12">
         <Form method="post">
           <button
             type="submit"
@@ -84,6 +82,10 @@ export default function Index() {
       </div>
 
       <div className="flex-grow"></div>
+
+      <Link to="/new">
+        <div className="text-center mb-2 p-4 text-lg text-clear">Custom</div>
+      </Link>
     </div>
   );
 }
