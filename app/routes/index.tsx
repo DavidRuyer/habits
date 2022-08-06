@@ -15,7 +15,7 @@ type LoaderData = { lastHit: Hit | null };
 
 export const loader: LoaderFunction = async () => {
   const data: LoaderData = {
-    lastHit: await db.hit.findFirst({ orderBy: { createdAt: "asc" } }),
+    lastHit: await db.hit.findFirst({ orderBy: { createdAt: "desc" } }),
   };
   return json(data);
 };
