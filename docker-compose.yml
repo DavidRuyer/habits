@@ -1,0 +1,13 @@
+# docker-compose.yml
+version: "3.1"
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: habits
+      POSTGRES_USER: habits_user
+      POSTGRES_PASSWORD: habits_pwd
+    ports:
+      - 5432:5432
