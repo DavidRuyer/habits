@@ -15,7 +15,7 @@ type LoaderData = { lastHit: Hit | null };
 
 export const loader: LoaderFunction = async () => {
   const data: LoaderData = {
-    lastHit: await db.hit.findFirst({ orderBy: { createdAt: "desc" } }),
+    lastHit: await db.hit.findFirst({ orderBy: { createdAt: "asc" } }),
   };
   return json(data);
 };
@@ -54,7 +54,7 @@ function SafeProgress(props: { lastHit: string | undefined; now: Date }) {
   const elapsed = dayjs.duration(dayNow.diff(dayjs(props.lastHit)));
 
   return (
-    <Progress value={elapsed.seconds() / 60} text={elapsed.format("mm:ss")} />
+    <Progress value={elapsed.seconds() / 60} text={elapsed.format("H:mm:ss")} />
   );
 }
 
