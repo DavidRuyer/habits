@@ -83,9 +83,10 @@ export default function Index() {
 
       <div className="flex-grow"></div>
 
-      <Link to="/new">
-        <div className="text-center mb-2 p-4 text-lg text-clear">Custom</div>
-      </Link>
+      <div className="flex flex-row justify-between mb-2 p-4 text-lg text-clear">
+        <Link to="/stats">Stats</Link>
+        <Link to="/new">Custom</Link>
+      </div>
     </div>
   );
 }
