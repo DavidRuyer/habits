@@ -9,7 +9,7 @@ interface Result {
 }
 
 export async function loader() {
-  const lastWeek = dayjs().subtract(7, "days").toDate();
+  const lastWeek = dayjs().subtract(14, "days").toDate();
 
   // Consider day end at 4AM
   const results: any = await db.$queryRaw`
