@@ -11,8 +11,27 @@ interface Result {
 export async function loader() {
   const lastWeek = dayjs().subtract(7, "days").toDate();
 
-  const results: any =
-    await db.$queryRaw`SELECT DATE("createdAt") date, COUNT(id) count FROM "Hit" WHERE "createdAt" >= ${lastWeek} GROUP BY date ORDER BY date ASC`;
+  // Consider day end at 4AM
+  const results: any = await db.$queryRaw`
+    WITH bydate AS (
+      SELECT
+        id,
+        DATE("createdAt" - interval '4' hour) date
+      FROM
+        "Hit"
+    )
+    SELECT
+      date,
+      COUNT(id) count
+    FROM
+      bydate
+    WHERE
+      date >= ${lastWeek}
+    GROUP BY
+      date
+    ORDER BY
+      date ASC
+  `;
 
   const stats: Result[] = results.map((res: any) => ({
     date: res.date,
