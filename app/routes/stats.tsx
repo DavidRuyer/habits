@@ -75,6 +75,16 @@ export default function Stats() {
             stroke="rgba(255, 255, 255, 0.8)"
             strokeDasharray="3 3"
           />
+          <ReferenceLine
+            y={15}
+            stroke="rgba(255, 255, 255, 0.8)"
+            strokeDasharray="3 3"
+          />
+          <ReferenceLine
+            y={20}
+            stroke="rgba(255, 255, 255, 0.8)"
+            strokeDasharray="3 3"
+          />
 
           <ReferenceLine y={0} stroke="white" strokeWidth={2} />
           <Bar dataKey="count" className="fill-clear" />
