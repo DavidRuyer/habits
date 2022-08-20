@@ -3,7 +3,6 @@ import { redirect } from "@remix-run/node";
 import { Form, Link } from "@remix-run/react";
 import { createHit } from "../services/hits.service";
 import dayjs from "../utils/dayjs";
-import { db } from "../utils/db.server";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -71,7 +70,7 @@ export default function New() {
         </label>
         <button
           type="submit"
-          className="bg-slate-600 text-2xl px-6 py-4 w-full rounded"
+          className="bg-clear-dark text-2xl px-6 py-4 w-full rounded"
         >
           Fix
         </button>

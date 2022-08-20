@@ -69,7 +69,7 @@ export default function Index() {
         <Form method="post">
           <button
             type="submit"
-            className="bg-slate-600 text-2xl px-6 py-4 w-full rounded"
+            className="bg-clear-dark text-2xl px-6 py-4 w-full rounded"
           >
             Hit
           </button>
