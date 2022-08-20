@@ -1,30 +1,25 @@
-import type { Hit } from "@prisma/client";
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type { ActionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, Link, useLoaderData } from "@remix-run/react";
-import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration";
+import dayjs from "../utils/dayjs";
 import { useEffect, useState } from "react";
 import Progress from "../components/Progress";
-import { db } from "../utils/db.server";
+import { createHit, fetchLastHit } from "../services/hits.service";
 
-dayjs.extend(duration);
+export async function loader() {
+  const lastHit = await fetchLastHit();
 
-type LoaderData = { lastHit: Hit | null };
+  return json({
+    lastHit: lastHit?.toDate(),
+  });
+}
 
-export const loader: LoaderFunction = async () => {
-  const data: LoaderData = {
-    lastHit: await db.hit.findFirst({ orderBy: { createdAt: "desc" } }),
-  };
-  return json(data);
-};
-
-export const action: ActionFunction = async ({ request }) => {
-  await db.hit.create({ data: {} });
+export async function action({ request }: ActionArgs) {
+  await createHit({});
 
   return redirect("/");
-};
+}
 
 const useTimer = () => {
   const [time, setTime] = useState(new Date());
@@ -59,7 +54,7 @@ function SafeProgress(props: { lastHit: string | undefined; now: Date }) {
 }
 
 export default function Index() {
-  const data = useLoaderData<LoaderData>();
+  const data = useLoaderData<typeof loader>();
 
   // Timer
   const time = useTimer();
@@ -68,7 +63,7 @@ export default function Index() {
     <div className="flex flex-col h-full mx-8">
       <div className="flex-grow"></div>
 
-      <SafeProgress lastHit={data.lastHit?.createdAt} now={time} />
+      <SafeProgress lastHit={data.lastHit} now={time} />
 
       <div className="mt-12">
         <Form method="post">

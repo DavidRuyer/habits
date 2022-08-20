@@ -1,7 +1,8 @@
 import type { ActionFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Form, Link } from "@remix-run/react";
-import dayjs from "dayjs";
+import { createHit } from "../services/hits.service";
+import dayjs from "../utils/dayjs";
 import { db } from "../utils/db.server";
 
 export const action: ActionFunction = async ({ request }) => {
@@ -21,7 +22,8 @@ export const action: ActionFunction = async ({ request }) => {
 
   const value = quickValue ? Number(quickValue) : Number(customValue);
   const actualCreatedAt = dayjs().subtract(value, "minutes");
-  await db.hit.create({ data: { createdAt: actualCreatedAt.toDate() } });
+
+  await createHit({ createdAt: actualCreatedAt });
 
   return redirect("/");
 };

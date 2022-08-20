@@ -1,42 +1,9 @@
 import { Link, useLoaderData } from "@remix-run/react";
-import dayjs from "dayjs";
 import { Bar, BarChart, ReferenceLine, ResponsiveContainer } from "recharts";
-import { db } from "../utils/db.server";
-
-interface Result {
-  date: Date;
-  count: number;
-}
+import { getStats } from "../services/hits.service";
 
 export async function loader() {
-  const lastWeek = dayjs().subtract(14, "days").toDate();
-
-  // Consider day end at 4AM
-  const results: any = await db.$queryRaw`
-    WITH bydate AS (
-      SELECT
-        id,
-        DATE("createdAt" - interval '4' hour) date
-      FROM
-        "Hit"
-    )
-    SELECT
-      date,
-      COUNT(id) count
-    FROM
-      bydate
-    WHERE
-      date >= ${lastWeek}
-    GROUP BY
-      date
-    ORDER BY
-      date ASC
-  `;
-
-  const stats: Result[] = results.map((res: any) => ({
-    date: res.date,
-    count: Number(res.count),
-  }));
+  const stats = await getStats();
 
   return { stats };
 }
