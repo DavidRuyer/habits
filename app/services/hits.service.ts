@@ -1,8 +1,10 @@
 import type { Dayjs } from "dayjs";
 import dayjs from "../utils/dayjs";
 import { db } from "../utils/db.server";
+import { rangeRight } from "lodash";
 
 const MIN_ELAPSED_IN_SECONDS = 30;
+const HISTORY_IN_DAYS = 21;
 
 export const fetchLastHit = async () => {
   const hit = await db.hit.findFirst({ orderBy: { createdAt: "desc" } });
@@ -35,10 +37,10 @@ interface StatPoint {
 }
 
 export const getStats = async () => {
-  const lastWeek = dayjs().subtract(14, "days").toDate();
+  const lastWeek = dayjs().subtract(HISTORY_IN_DAYS, "days").toDate();
 
   // Consider day end at 4AM
-  const results: any = await db.$queryRaw`
+  const results: { date: Date; count: BigInt }[] = await db.$queryRaw`
     WITH bydate AS (
       SELECT
         id,
@@ -59,10 +61,13 @@ export const getStats = async () => {
       date ASC
   `;
 
-  const stats: StatPoint[] = results.map((res: any) => ({
-    date: res.date,
-    count: Number(res.count),
-  }));
+  // Enforce a datapoint for each day event if no hit
+  const stats: StatPoint[] = rangeRight(HISTORY_IN_DAYS)
+    .map((days) => dayjs().subtract(days, "days"))
+    .map((day) => ({
+      date: day.toDate(),
+      count: Number(results.find(({ date }) => day.isSame(date, "day"))?.count),
+    }));
 
   return stats;
 };
