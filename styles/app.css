@@ -34,3 +34,17 @@ body {
   transform: rotate(-90deg) scaleY(-1);
   transform-origin: 50% 50%;
 }
+
+/* Scrollbar */
+.scrollbar-hide {
+  /* IE and Edge */
+  -ms-overflow-style: none;
+
+  /* Firefox */
+  scrollbar-width: none;
+}
+
+/* Safari and Chrome */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

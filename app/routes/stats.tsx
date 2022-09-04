@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import { Bar, BarChart, ReferenceLine, ResponsiveContainer } from "recharts";
 import Layout from "../components/Layout";
 import { getStats } from "../services/hits.service";
@@ -13,7 +13,7 @@ export default function Stats() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <Layout backUrl="/">
+    <Layout>
       <ResponsiveContainer width="100%" height="60%">
         <BarChart width={400} height={400} data={data.stats}>
           <ReferenceLine

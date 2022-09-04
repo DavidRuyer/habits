@@ -3,10 +3,10 @@ import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, Link, useLoaderData } from "@remix-run/react";
 import dayjs from "../utils/dayjs";
-import { useEffect, useState } from "react";
 import Progress from "../components/Progress";
 import { createHit, fetchLastHit } from "../services/hits.service";
 import Layout from "../components/Layout";
+import useTimer from "../utils/useTimer";
 
 export async function loader() {
   const lastHit = await fetchLastHit();
@@ -21,22 +21,6 @@ export async function action({ request }: ActionArgs) {
 
   return redirect("/");
 }
-
-const useTimer = () => {
-  const [time, setTime] = useState(new Date());
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTime(new Date());
-    }, 1000);
-
-    return function cleanup() {
-      clearInterval(interval);
-    };
-  });
-
-  return time;
-};
 
 function SafeProgress(props: { lastHit: string | undefined; now: Date }) {
   const dayNow = dayjs(props.now);
@@ -61,7 +45,7 @@ export default function Index() {
   const time = useTimer();
 
   return (
-    <Layout backUrl="/" nextUrl="/stats" nextTitle="Stats">
+    <Layout>
       <SafeProgress lastHit={data.lastHit} now={time} />
 
       <div className="mt-12">
@@ -73,6 +57,10 @@ export default function Index() {
             Hit
           </button>
         </Form>
+      </div>
+
+      <div className="flex flex-row justify-between mb-2 p-4 text-lg text-clear">
+        <Link to="/stats">Stats</Link>
       </div>
     </Layout>
   );
