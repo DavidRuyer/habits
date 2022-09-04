@@ -6,6 +6,7 @@ import dayjs from "../utils/dayjs";
 import { useEffect, useState } from "react";
 import Progress from "../components/Progress";
 import { createHit, fetchLastHit } from "../services/hits.service";
+import Layout from "../components/Layout";
 
 export async function loader() {
   const lastHit = await fetchLastHit();
@@ -60,9 +61,7 @@ export default function Index() {
   const time = useTimer();
 
   return (
-    <div className="flex flex-col h-full mx-8">
-      <div className="flex-grow"></div>
-
+    <Layout backUrl="/" nextUrl="/stats" nextTitle="Stats">
       <SafeProgress lastHit={data.lastHit} now={time} />
 
       <div className="mt-12">
@@ -75,13 +74,6 @@ export default function Index() {
           </button>
         </Form>
       </div>
-
-      <div className="flex-grow"></div>
-
-      <div className="flex flex-row justify-between mb-2 p-4 text-lg text-clear">
-        <Link to="/stats">Stats</Link>
-        <Link to="/new">Custom</Link>
-      </div>
-    </div>
+    </Layout>
   );
 }

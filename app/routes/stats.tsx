@@ -1,5 +1,6 @@
 import { Link, useLoaderData } from "@remix-run/react";
 import { Bar, BarChart, ReferenceLine, ResponsiveContainer } from "recharts";
+import Layout from "../components/Layout";
 import { getStats } from "../services/hits.service";
 
 export async function loader() {
@@ -12,9 +13,7 @@ export default function Stats() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className="flex flex-col h-full mx-8">
-      <div className="flex-grow"></div>
-
+    <Layout backUrl="/">
       <ResponsiveContainer width="100%" height="60%">
         <BarChart width={400} height={400} data={data.stats}>
           <ReferenceLine
@@ -57,12 +56,6 @@ export default function Stats() {
           <Bar dataKey="count" className="fill-clear" />
         </BarChart>
       </ResponsiveContainer>
-
-      <div className="flex-grow"></div>
-
-      <Link to="/">
-        <div className="text-center mb-2 p-4 text-lg text-clear">Back</div>
-      </Link>
-    </div>
+    </Layout>
   );
 }

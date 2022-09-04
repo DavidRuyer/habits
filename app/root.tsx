@@ -6,6 +6,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "@remix-run/react";
 import { useEffect } from "react";
 
@@ -23,13 +24,15 @@ export function links() {
 }
 
 export default function App() {
+  const location = useLocation();
+
   // Handle vhs in mobile devices : https://stackoverflow.com/questions/61308575/tailwind-h-screen-doesn-t-work-properly-on-mobile-devices
   useEffect(() => {
     document.documentElement.style.setProperty(
       "--vh",
       window.innerHeight * 0.01 + "px"
     );
-  }, []);
+  }, [location.state]);
 
   return (
     <html lang="en">
