@@ -46,6 +46,8 @@ export default function Index() {
 
   return (
     <Layout>
+      <div className="flex-grow"></div>
+
       <SafeProgress lastHit={data.lastHit} now={time} />
 
       <div className="mt-12">
@@ -59,8 +61,11 @@ export default function Index() {
         </Form>
       </div>
 
+      <div className="flex-grow"></div>
+
       <div className="flex flex-row justify-between mb-2 p-4 text-lg text-clear">
         <Link to="/stats">Stats</Link>
+        <Link to="/gym">Gym</Link>
       </div>
     </Layout>
   );

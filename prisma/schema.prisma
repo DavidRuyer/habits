@@ -17,3 +17,15 @@ model Hit {
 
   @@index([createdAt])
 }
+
+model Exercise {
+  id String @id @default(uuid())
+
+  slug String
+
+  reps Json
+
+  createdAt DateTime @default(now())
+
+  @@index([slug, createdAt])
+}

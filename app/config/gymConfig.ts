@@ -1,69 +1,59 @@
-export const WEIGHTS = [18, 23, 25, 27, 32, 36, 41, 45];
+export const WEIGHTS = [18, 23, 25, 27, 32, 36, 41, 45, 50];
+
+export const RATINGS = [
+  {
+    rate: 4,
+    label: "😵",
+  },
+  {
+    rate: 3,
+    label: "🥵",
+  },
+  {
+    rate: 2,
+    label: "😬",
+  },
+  {
+    rate: 1,
+    label: "😎",
+  },
+];
 
 export const EXERCISES = [
   {
-    id: "pompes",
-    name: "Pompes",
-    kind: "bodyweight",
-  },
-  {
-    id: "gainage",
-    name: "Gainage",
-    kind: "gainage",
-  },
-  {
-    id: "squats",
-    name: "Squats",
-    kind: "bodyweight",
-  },
-  {
-    id: "rameur",
-    name: "Rameur",
-    kind: "rameur",
-  },
-  {
     id: "developpe-couche",
     name: "Développé Couché",
-    kind: "machine",
-  },
-  {
-    id: "tire-assis",
-    name: "Tiré assis",
-    kind: "machine",
-  },
-  {
-    id: "developpe-epaules",
-    name: "Développé Epaules",
-    kind: "machine",
-  },
-  {
-    id: "tire-traction",
-    name: "Tiré traction",
-    kind: "machine",
-  },
-  {
-    id: "papillon-avant",
-    name: "Papillon Avant",
-    kind: "machine",
-  },
-  {
-    id: "papillon-arriere",
-    name: "Papillon Arrière",
-    kind: "machine",
   },
   {
     id: "developpe-horizontal",
     name: "Développé Horizontal",
-    kind: "machine",
+  },
+  {
+    id: "tire-assis",
+    name: "Tiré assis",
+  },
+  {
+    id: "developpe-epaules",
+    name: "Développé Epaules",
+  },
+  {
+    id: "tire-traction",
+    name: "Tiré traction",
+  },
+  {
+    id: "papillon-avant",
+    name: "Papillon Avant",
+  },
+  {
+    id: "papillon-arriere",
+    name: "Papillon Arrière",
   },
   {
     id: "poignees",
     name: "Poignées",
-    kind: "machine",
   },
   {
     id: "curl-corde",
     name: "Curl corde",
-    kind: "machine",
   },
 ] as const;

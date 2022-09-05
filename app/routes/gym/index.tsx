@@ -6,7 +6,7 @@ import { EXERCISES } from "../../config/gymConfig";
 export default function GymList() {
   return (
     <Layout>
-      <div className="overflow-y-scroll scroll space-y-4 mt-12 scrollbar-hide">
+      <div className="overflow-y-scroll scroll space-y-4 my-auto scrollbar-hide">
         {EXERCISES.map(({ id, name }) => (
           <Link
             to={`/gym/${id}`}
