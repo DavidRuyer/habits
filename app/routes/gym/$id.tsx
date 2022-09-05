@@ -139,10 +139,12 @@ export default function ExercicePage() {
       <div className="flex-grow"></div>
 
       <div className="mx-12">
-        <Progress
-          value={remaining ? 1 - remaining / timerDelay : 0}
-          text={remaining ? `${remaining}s` : "Start"}
-        />
+        <div className="mx-auto w-64">
+          <Progress
+            value={remaining ? 1 - remaining / timerDelay : 0}
+            text={remaining ? `${remaining}s` : "Start"}
+          />
+        </div>
         <div className="flex flex-row justify-around mt-4">
           {TIMERS.map((delay) => (
             <button

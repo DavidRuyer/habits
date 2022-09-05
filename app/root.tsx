@@ -32,7 +32,7 @@ export default function App() {
       "--vh",
       window.innerHeight * 0.01 + "px"
     );
-  }, [location.state]);
+  }, [location.pathname]);
 
   return (
     <html lang="en">
