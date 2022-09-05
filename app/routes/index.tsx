@@ -32,10 +32,12 @@ function SafeProgress(props: { lastHit: string | undefined; now: Date }) {
   }
 
   const elapsed = dayjs.duration(dayNow.diff(dayjs(props.lastHit)));
+  const displayed =
+    elapsed.days() >= 1
+      ? elapsed.format("D[d] H[H]")
+      : elapsed.format("H:mm:ss");
 
-  return (
-    <Progress value={elapsed.seconds() / 60} text={elapsed.format("H:mm:ss")} />
-  );
+  return <Progress value={elapsed.seconds() / 60} text={displayed} />;
 }
 
 export default function Index() {
