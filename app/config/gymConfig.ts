@@ -1,4 +1,4 @@
-export const WEIGHTS = [18, 23, 25, 27, 32, 36, 41, 45, 50];
+export const WEIGHTS = [18, 23, 25, 27, 32, 36, 41, 45, 50, 55];
 
 export const RATINGS = [
   {
@@ -30,15 +30,15 @@ export const EXERCISES = [
   },
   {
     id: "tire-assis",
-    name: "Tiré assis",
+    name: "Tirage Horizontal",
   },
   {
     id: "developpe-epaules",
-    name: "Développé Epaules",
+    name: "Développé Vertical",
   },
   {
     id: "tire-traction",
-    name: "Tiré traction",
+    name: "Poulie verticale",
   },
   {
     id: "papillon-avant",
@@ -50,10 +50,14 @@ export const EXERCISES = [
   },
   {
     id: "poignees",
-    name: "Poignées",
+    name: "Poulie tiré corde",
   },
   {
     id: "curl-corde",
-    name: "Curl corde",
+    name: "Poulie curl",
+  },
+  {
+    id: "poulie-levee",
+    name: "Poulie levée",
   },
 ] as const;
