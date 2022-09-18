@@ -39,7 +39,7 @@ export const loader = async ({ params }: LoaderArgs) => {
   const lastSession = await getLastSession(params.id);
   const lastReps = lastSession ? RepsSchema.parse(lastSession.reps) : [];
 
-  return json({ exercise, lastReps });
+  return json({ exercise, lastSession, lastReps });
 };
 
 export const action = async ({ request, params }: ActionArgs) => {
@@ -75,7 +75,7 @@ function RepsList(props: { reps: Reps }) {
 }
 
 export default function ExercicePage() {
-  const { exercise, lastReps } = useLoaderData<typeof loader>();
+  const { exercise, lastSession, lastReps } = useLoaderData<typeof loader>();
 
   const [reps, setReps] = useState<Reps>([]);
   const [currentWeight, setCurrentWeight] = useState<number | null>(null);
@@ -123,12 +123,14 @@ export default function ExercicePage() {
 
       <div className="text-2xl text-center mt-6 px-20">{exercise.name}</div>
 
-      <div className="flex flex-row mx-4 items-center mt-8 h-7">
-        <div className="text-clear text-right uppercase text-xs w-16 mr-4">
-          Last
+      {lastSession && (
+        <div className="flex flex-row mx-4 items-center mt-8 h-7">
+          <div className="text-clear text-right uppercase text-xs w-16 mr-4">
+            {dayjs(lastSession.createdAt).fromNow(true)}
+          </div>
+          <RepsList reps={lastReps} />
         </div>
-        <RepsList reps={lastReps} />
-      </div>
+      )}
       <div className="flex flex-row mx-4 items-center mt-1 h-7">
         <div className="text-clear text-right uppercase text-xs w-16 mr-4">
           Current
