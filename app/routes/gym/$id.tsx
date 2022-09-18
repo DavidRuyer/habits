@@ -13,7 +13,7 @@ import invariant from "tiny-invariant";
 import Progress from "../../components/Progress";
 import useTimer from "../../utils/useTimer";
 import dayjs from "../../utils/dayjs";
-import { EXERCISES, RATINGS, WEIGHTS } from "../../config/gymConfig";
+import { EXERCISES, RATINGS } from "../../config/gymConfig";
 import classNames from "../../utils/classnames";
 import {
   createSession,
@@ -163,7 +163,7 @@ export default function ExercicePage() {
       <div className="flex-grow"></div>
 
       <div className="overflow-x-scroll flex flex-row space-x-4 scrollbar-hide mt-10">
-        {WEIGHTS.map((weight) => (
+        {exercise.weights.map((weight) => (
           <button
             className={classNames(
               "bg-clear-light h-8 rounded-full text-lg px-6 border-2 first:ml-8 last:mr-8",
