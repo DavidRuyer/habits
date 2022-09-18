@@ -1,4 +1,4 @@
-export const WEIGHTS = [18, 23, 25, 27, 32, 36, 41, 45, 50, 55];
+export const WEIGHTS = [18, 23, 25, 27, 32, 36, 41, 45, 50, 55, 60];
 
 export const RATINGS = [
   {
