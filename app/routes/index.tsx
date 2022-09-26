@@ -2,71 +2,60 @@ import type { ActionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, Link, useLoaderData } from "@remix-run/react";
-import dayjs from "../utils/dayjs";
-import Progress from "../components/Progress";
-import { createHit, fetchLastHit } from "../services/hits.service";
+import { createShit } from "../services/coolShit.service";
 import Layout from "../components/Layout";
-import useTimer from "../utils/useTimer";
+import invariant from "tiny-invariant";
 
-export async function loader() {
-  const lastHit = await fetchLastHit();
+const SUBMITS = [
+  "Cool shit is cool 😎",
+  "Better done than todo",
+  "Adventure !",
+  "Progress 💪",
+  "🎉",
+];
 
-  return json({
-    lastHit: lastHit?.toDate(),
-  });
-}
+// export async function loader() {
+//   return json({});
+// }
 
 export async function action({ request }: ActionArgs) {
-  await createHit({});
+  const formData = await request.formData();
+  const shit = formData.get("shit") as string;
+  invariant(shit, "Expected reps in payload");
+
+  await createShit({ shit });
 
   return redirect("/");
 }
 
-function SafeProgress(props: { lastHit: string | undefined; now: Date }) {
-  const dayNow = dayjs(props.now);
-
-  if (!props.lastHit) {
-    return (
-      <Progress value={dayNow.second() / 60} text={dayNow.format("mm:ss")} />
-    );
-  }
-
-  const elapsed = dayjs.duration(dayNow.diff(dayjs(props.lastHit)));
-  const displayed =
-    elapsed.days() >= 1
-      ? elapsed.format("D[d] H[H]")
-      : elapsed.format("H:mm:ss");
-
-  return <Progress value={elapsed.seconds() / 60} text={displayed} />;
-}
-
-export default function Index() {
-  const data = useLoaderData<typeof loader>();
-
-  // Timer
-  const time = useTimer();
+export default function CoolShit() {
+  // const data = useLoaderData<typeof loader>();
 
   return (
     <Layout>
       <div className="flex-grow"></div>
 
-      <SafeProgress lastHit={data.lastHit} now={time} />
-
-      <div className="mt-12">
-        <Form method="post">
+      <Form reloadDocument method="post" className="space-y-4">
+        <input
+          name="shit"
+          placeholder="Cool shit"
+          className="w-full rounded px-6 py-4 text-xl bg-clear-light text-white focus:ring-clear focus:outline-none focus:ring-2 placeholder:text-clear"
+        />
+        {SUBMITS.map((submit) => (
           <button
             type="submit"
+            key={submit}
             className="bg-clear-dark text-2xl px-6 py-4 w-full rounded"
           >
-            Hit
+            {submit}
           </button>
-        </Form>
-      </div>
+        ))}
+      </Form>
 
       <div className="flex-grow"></div>
 
       <div className="flex flex-row justify-between mb-2 p-4 text-lg text-clear">
-        <Link to="/stats">Stats</Link>
+        <Link to="/smoke">Smoke</Link>
         <Link to="/gym">Gym</Link>
       </div>
     </Layout>

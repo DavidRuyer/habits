@@ -29,3 +29,13 @@ model Exercise {
 
   @@index([slug, createdAt])
 }
+
+model Shit {
+  id String @id @default(uuid())
+
+  shit String
+
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
