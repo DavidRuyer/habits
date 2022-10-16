@@ -7,11 +7,10 @@ import Layout from "../components/Layout";
 import invariant from "tiny-invariant";
 
 const SUBMITS = [
-  "Cool shit is cool 😎",
-  "Better done than todo",
-  "Adventure !",
-  "Progress 💪",
-  "🎉",
+  "Appreciate cool 😎",
+  "One step forward 💪",
+  "Adventure 😨",
+  "Fuck yeah 🎉",
 ];
 
 // export async function loader() {
@@ -21,9 +20,12 @@ const SUBMITS = [
 export async function action({ request }: ActionArgs) {
   const formData = await request.formData();
   const shit = formData.get("shit") as string;
-  invariant(shit, "Expected reps in payload");
+  invariant(shit, "Expected shit in payload");
 
-  await createShit({ shit });
+  const flag = formData.get("flag") as string;
+  invariant(flag, "Expected flag in payload");
+
+  console.log({ shit, flag });
 
   return redirect("/");
 }
@@ -45,6 +47,8 @@ export default function CoolShit() {
           <button
             type="submit"
             key={submit}
+            name="flag"
+            value={submit}
             className="bg-clear-dark text-2xl px-6 py-4 w-full rounded"
           >
             {submit}

@@ -35,6 +35,8 @@ model Shit {
 
   shit String
 
+  flag String?
+
   createdAt DateTime @default(now())
 
   @@index([createdAt])

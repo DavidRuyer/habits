@@ -1,11 +1,10 @@
-import type { Dayjs } from "dayjs";
-import dayjs from "../utils/dayjs";
 import { db } from "../utils/db.server";
 
-export const createShit = async (args: { shit: string }) => {
+export const createShit = async (args: { shit: string; flag: string }) => {
   await db.shit.create({
     data: {
       shit: args.shit,
+      flag: args.flag,
     },
   });
 };
