@@ -1,8 +1,7 @@
 import type { ActionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Form, Link, useLoaderData } from "@remix-run/react";
-import { createShit } from "../services/coolShit.service";
+import { Form, Link } from "@remix-run/react";
 import Layout from "../components/Layout";
 import invariant from "tiny-invariant";
 
@@ -12,10 +11,6 @@ const SUBMITS = [
   "Adventure 😨",
   "Fuck yeah 🎉",
 ];
-
-// export async function loader() {
-//   return json({});
-// }
 
 export async function action({ request }: ActionArgs) {
   const formData = await request.formData();
@@ -31,8 +26,6 @@ export async function action({ request }: ActionArgs) {
 }
 
 export default function CoolShit() {
-  // const data = useLoaderData<typeof loader>();
-
   return (
     <Layout>
       <div className="flex-grow"></div>
@@ -59,7 +52,7 @@ export default function CoolShit() {
       <div className="flex-grow"></div>
 
       <div className="flex flex-row justify-between mb-2 p-4 text-lg text-clear">
-        <Link to="/smoke">Smoke</Link>
+        <Link to="/hits">Hits</Link>
         <Link to="/gym">Gym</Link>
       </div>
     </Layout>
