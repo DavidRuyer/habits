@@ -4,7 +4,7 @@ import { json } from "@remix-run/node";
 import { Form, Link, useLoaderData } from "@remix-run/react";
 import Layout from "../components/Layout";
 import invariant from "tiny-invariant";
-import { getLastShit } from "../services/coolShit.service";
+import { createShit, getLastShit } from "../services/coolShit.service";
 import dayjs from "../utils/dayjs";
 
 const SUBMITS = [
@@ -30,6 +30,8 @@ export async function action({ request }: ActionArgs) {
   invariant(flag, "Expected flag in payload");
 
   console.log({ shit, flag });
+
+  await createShit({ shit, flag });
 
   return redirect("/");
 }
