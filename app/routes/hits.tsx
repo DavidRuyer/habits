@@ -6,6 +6,7 @@ import Layout from "../components/Layout";
 import { categorizedHits, createCustomHit } from "../services/hits.service";
 import classNames from "../utils/classnames";
 import invariant from "tiny-invariant";
+import { reverse } from "lodash";
 
 // 15 ticks should fit in the layout
 
@@ -28,11 +29,15 @@ export const action = async ({ request }: ActionArgs) => {
   return redirect("/hits");
 };
 
-const Tick = (props: { value: number }) => (
+const Tick = (props: { current: boolean; value: number }) => (
   <div
     className={classNames(
       "h-4 w-1.5 rounded",
-      props.value === 0 ? "bg-clear-light" : "bg-clear"
+      props.value === 1
+        ? "bg-clear"
+        : props.current
+        ? "bg-clear animate-pulse"
+        : "bg-clear-light"
     )}
   ></div>
 );
@@ -58,19 +63,19 @@ export default function Hits() {
                 </div>
               </div>
               <div className="flex flex-row justify-end space-x-1">
-                {stats.map((val, index) => (
-                  <Tick key={index} value={val} />
+                {/* flex-row-reverse display bug */}
+                {reverse(stats).map((val, index) => (
+                  <Tick
+                    key={index}
+                    current={index === stats.length - 1}
+                    value={val}
+                  />
                 ))}
               </div>
               <input type="hidden" name="kind" value={id} />
             </div>
             <button>
-              <PlusCircleIcon
-                className={classNames(
-                  "h-8 w-8",
-                  stats[0] === 0 && "animate-pulse"
-                )}
-              />
+              <PlusCircleIcon className="h-8 w-8" />
             </button>
           </form>
         ))}

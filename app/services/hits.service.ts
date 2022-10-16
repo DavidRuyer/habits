@@ -1,7 +1,15 @@
 import type { Dayjs } from "dayjs";
 import dayjs from "../utils/dayjs";
 import { db } from "../utils/db.server";
-import { countBy, groupBy, maxBy, minBy, rangeRight, wrap } from "lodash";
+import {
+  countBy,
+  groupBy,
+  maxBy,
+  minBy,
+  range,
+  rangeRight,
+  wrap,
+} from "lodash";
 import { Habit, HABITS } from "../config/habitsConfig";
 import { date } from "zod";
 
@@ -87,7 +95,7 @@ export const categorizedHits = async () => {
       ) + 1;
 
     // Get only the ones which matter
-    const stats = rangeRight(ticks).map((i) => grouped[i] ?? 0);
+    const stats = range(ticks).map((i) => grouped[i] ?? 0);
 
     return {
       latest: latestDate,
