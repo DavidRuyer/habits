@@ -8,3 +8,11 @@ export const createShit = async (args: { shit: string; flag: string }) => {
     },
   });
 };
+
+export const getLastShit = async () => {
+  const shit = await db.shit.findFirst({
+    orderBy: { createdAt: "desc" },
+  });
+
+  return shit;
+};

@@ -1,9 +1,11 @@
 import type { ActionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Form, Link } from "@remix-run/react";
+import { Form, Link, useLoaderData } from "@remix-run/react";
 import Layout from "../components/Layout";
 import invariant from "tiny-invariant";
+import { getLastShit } from "../services/coolShit.service";
+import dayjs from "../utils/dayjs";
 
 const SUBMITS = [
   "Appreciate cool 😎",
@@ -11,6 +13,13 @@ const SUBMITS = [
   "Adventure 😨",
   "Fuck yeah 🎉",
 ];
+
+export async function loader() {
+  const lastShit = await getLastShit();
+  return json({
+    lastShit,
+  });
+}
 
 export async function action({ request }: ActionArgs) {
   const formData = await request.formData();
@@ -26,6 +35,8 @@ export async function action({ request }: ActionArgs) {
 }
 
 export default function CoolShit() {
+  const { lastShit } = useLoaderData<typeof loader>();
+
   return (
     <Layout>
       <div className="flex-grow"></div>
@@ -51,6 +62,11 @@ export default function CoolShit() {
 
       <div className="flex-grow"></div>
 
+      {lastShit && (
+        <div className="text-sm text-center text-clear-light mb-2">
+          {lastShit.shit} - {dayjs(lastShit.createdAt).fromNow()}{" "}
+        </div>
+      )}
       <div className="flex flex-row justify-between mb-2 p-4 text-lg text-clear">
         <Link to="/hits">Hits</Link>
         <Link to="/gym">Gym</Link>
