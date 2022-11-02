@@ -33,7 +33,9 @@ function SafeProgress(props: { lastHit: string | undefined; now: Date }) {
 
   const elapsed = dayjs.duration(dayNow.diff(dayjs(props.lastHit)));
   const displayed =
-    elapsed.days() >= 1
+    elapsed.months() >= 1
+      ? elapsed.format("M[m] D[d]")
+      : elapsed.days() >= 1
       ? elapsed.format("D[d] H[H]")
       : elapsed.format("H:mm:ss");
 
