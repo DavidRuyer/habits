@@ -8,44 +8,74 @@ export interface Habit {
 export const HABITS: Habit[] = [
   {
     id: "learn",
-    title: "Learn",
+    title: "Read a book",
     emoji: "📚",
-    frequency: "day",
+    frequency: "month",
   },
   {
     id: "cook",
-    title: "Cook",
+    title: "Cook a meal",
     emoji: "🍳",
-    frequency: "week",
+    frequency: "month",
   },
   {
     id: "make",
-    title: "Make",
-    emoji: "🔨",
-    frequency: "week",
+    title: "Code something",
+    emoji: "⌨️",
+    frequency: "month",
   },
   {
     id: "meet",
-    title: "Meet",
-    emoji: "🍻",
-    frequency: "week",
+    title: "Check a new place",
+    emoji: "🍸",
+    frequency: "month",
   },
   {
     id: "discover",
-    title: "Discover",
-    emoji: "🤓",
+    title: "See a museum",
+    emoji: "🖼",
     frequency: "month",
   },
   {
     id: "family",
-    title: "Family",
+    title: "Call family",
     emoji: "👵",
     frequency: "month",
   },
   {
     id: "breathe",
-    title: "Breathe",
+    title: "Be in nature",
     emoji: "🌲",
     frequency: "month",
   },
+  {
+    id: "movies",
+    title: "See a movie",
+    emoji: "🎞",
+    frequency: "month",
+  },
+  {
+    id: "travel",
+    title: "Travel the world",
+    emoji: "🌍",
+    frequency: "month"
+  },
+  {
+    id: "sports",
+    title: "Get sweaty",
+    emoji: "🏃‍♂️",
+    frequency: "month"
+  },
+  {
+    id: "show",
+    title: "See a show",
+    emoji: "🎸",
+    frequency: "month"
+  },
+  {
+    id: "laugh", 
+    title: "Laugh at stand-up",
+    emoji: "🎭",
+    frequency: "month"
+  }
 ];

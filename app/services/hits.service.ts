@@ -88,18 +88,18 @@ export const categorizedHits = async () => {
       getBucket(hit.createdAt, category.frequency)
     );
 
-    const ticks =
-      Math.min(
-        getBucket(oldestDate ?? new Date(), category.frequency),
-        HISTORY_TICKS
-      ) + 1;
+    // const ticks =
+    //   Math.min(
+    //     getBucket(oldestDate ?? new Date(), category.frequency),
+    //     HISTORY_TICKS
+    //   ) + 1;
 
-    // Get only the ones which matter
-    const stats = range(ticks).map((i) => grouped[i] ?? 0);
+    // // Get only the ones which matter
+    // const stats = range(ticks).map((i) => grouped[i] ?? 0);
 
     return {
       latest: latestDate,
-      stats,
+      // stats,
     };
   };
 

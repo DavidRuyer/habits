@@ -10,8 +10,9 @@ export const createShit = async (args: { shit: string; flag: string }) => {
 };
 
 export const getLastShit = async () => {
-  const shit = await db.shit.findFirst({
+  const shit = await db.shit.findMany({
     orderBy: { createdAt: "desc" },
+    take: 3,
   });
 
   return shit;
