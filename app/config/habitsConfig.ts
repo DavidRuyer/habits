@@ -2,80 +2,98 @@ export interface Habit {
   id: string;
   emoji: string;
   title: string;
-  frequency: "day" | "week" | "month";
+  obj: boolean;
 }
 
 export const HABITS: Habit[] = [
   {
+    id: "meet",
+    title: "Plan a meet",
+    emoji: "📆",
+    obj: true,
+  },
+  {
+    id: "talk",
+    title: "Talk to new people",
+    emoji: "🤝",
+    obj: true,
+  },
+  {
+    id: "clean",
+    title: "Clean evening",
+    emoji: "🫖",
+    obj: true,
+  },
+  {
     id: "learn",
-    title: "Read a book",
+    title: "Livre",
     emoji: "📚",
-    frequency: "month",
+    obj: false,
   },
   {
     id: "cook",
-    title: "Cook a meal",
+    title: "Cuisine",
     emoji: "🍳",
-    frequency: "month",
+    obj: false,
   },
   {
     id: "make",
-    title: "Code something",
+    title: "Code",
     emoji: "⌨️",
-    frequency: "month",
+    obj: false,
   },
   {
     id: "meet",
-    title: "Check a new place",
+    title: "Soirée",
     emoji: "🍸",
-    frequency: "month",
+    obj: false,
   },
   {
     id: "discover",
-    title: "See a museum",
+    title: "Expo",
     emoji: "🖼",
-    frequency: "month",
+    obj: false,
   },
   {
     id: "family",
-    title: "Call family",
+    title: "Famille",
     emoji: "👵",
-    frequency: "month",
+    obj: false,
   },
   {
     id: "breathe",
-    title: "Be in nature",
+    title: "Balade",
     emoji: "🌲",
-    frequency: "month",
+    obj: false,
   },
   {
     id: "movies",
-    title: "See a movie",
+    title: "Ciné",
     emoji: "🎞",
-    frequency: "month",
+    obj: false,
   },
   {
     id: "travel",
-    title: "Travel the world",
+    title: "Ailleurs",
     emoji: "🌍",
-    frequency: "month"
+    obj: false,
   },
   {
     id: "sports",
-    title: "Get sweaty",
+    title: "Escalade",
     emoji: "🏃‍♂️",
-    frequency: "month"
+    obj: false,
   },
   {
     id: "show",
-    title: "See a show",
+    title: "Concert",
     emoji: "🎸",
-    frequency: "month"
+    obj: false,
   },
   {
-    id: "laugh", 
-    title: "Laugh at stand-up",
+    id: "laugh",
+    title: "Stand-up",
     emoji: "🎭",
-    frequency: "month"
-  }
+    obj: false,
+  },
 ];

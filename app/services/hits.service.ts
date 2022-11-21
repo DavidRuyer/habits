@@ -55,21 +55,21 @@ export const createCustomHit = async (kind: string) => {
   });
 };
 
-const getBucket = (date: Date, frequency: Habit["frequency"]): number => {
-  const wrapped = dayjs(date).subtract(4, "hour");
-  const now = dayjs();
+// const getBucket = (date: Date, frequency: Habit["frequency"]): number => {
+//   const wrapped = dayjs(date).subtract(4, "hour");
+//   const now = dayjs();
 
-  switch (frequency) {
-    case "day":
-      return now.diff(wrapped, "day");
+//   switch (frequency) {
+//     case "day":
+//       return now.diff(wrapped, "day");
 
-    case "week":
-      return now.diff(wrapped, "week");
+//     case "week":
+//       return now.diff(wrapped, "week");
 
-    case "month":
-      return now.diff(wrapped, "month");
-  }
-};
+//     case "month":
+//       return now.diff(wrapped, "month");
+//   }
+// };
 
 export const categorizedHits = async () => {
   const allHits = await db.hit.findMany({
@@ -79,14 +79,12 @@ export const categorizedHits = async () => {
   const getCategoryData = (category: Habit) => {
     const categoryHits = allHits.filter((hit) => hit.kind === category.id);
 
-    const oldestDate =
-      minBy(categoryHits, (hit) => hit.createdAt)?.createdAt ?? new Date();
-    const latestDate =
-      maxBy(categoryHits, (hit) => hit.createdAt)?.createdAt ?? new Date();
+    // const oldestDate = minBy(categoryHits, (hit) => hit.createdAt)?.createdAt;
+    const latestDate = maxBy(categoryHits, (hit) => hit.createdAt)?.createdAt;
 
-    const grouped = countBy(categoryHits, (hit) =>
-      getBucket(hit.createdAt, category.frequency)
-    );
+    // const grouped = countBy(categoryHits, (hit) =>
+    //   getBucket(hit.createdAt, category.frequency)
+    // );
 
     // const ticks =
     //   Math.min(
