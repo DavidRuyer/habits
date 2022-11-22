@@ -120,7 +120,9 @@ export default function CoolShit() {
       {categories
         .filter((cat) => cat.obj)
         .map((cat) => (
-          <div key={cat.id}>
+          <Form reloadDocument key={cat.id} method="post">
+            <input type="hidden" name="kind" value={cat.id} />
+            <input type="hidden" name="section" value="hit" />
             <button className="flex flex-row w-full rounded bg-clear-light px-6 py-4 items-baseline my-2">
               <div className="text-2xl self-center mr-2">{cat.emoji}</div>
               <div className="text-lg">{cat.title}</div>
@@ -128,7 +130,7 @@ export default function CoolShit() {
                 {cat.latest && dayjs(cat.latest).fromNow()}
               </div>
             </button>
-          </div>
+          </Form>
         ))}
 
       <div className="overflow-y-scroll scroll my-auto scrollbar-hide mt-6">
