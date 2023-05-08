@@ -1,4 +1,4 @@
-export const WEIGHTS = [25, 27, 32, 36, 41, 45, 50, 55, 60, 65, 70];
+export const WEIGHTS = [25, 27, 32, 36, 41, 45, 50, 55, 60, 65, 70, 73, 75, 78];
 
 export const GAINAGE_WEIGHTS = [30, 45, 60, 90];
 
